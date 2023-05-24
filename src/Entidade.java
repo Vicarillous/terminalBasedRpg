@@ -1,14 +1,16 @@
 public class Entidade {
     private String nome;
     private int hp;
+    private int def;
     private int nivel;
-    private int atkDmg;
+    private int atk;
 
-    public Entidade(String nome, int hp, int nivel, int atkDmg) {
+    public Entidade(String nome, int hp, int def, int nivel, int atk) {
         this.nome = nome;
         this.hp = hp;
+        this.def = def;
         this.nivel = nivel;
-        this.atkDmg = atkDmg;
+        this.atk = atk;
     }
 
     public int getHp() {
@@ -17,6 +19,14 @@ public class Entidade {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
     }
 
     public int getNivel() {
@@ -35,7 +45,21 @@ public class Entidade {
         this.nome = nome;
     }
 
-    public void atacar(Entidade alvo) {
-        alvo.setHp(alvo.getHp() - this.atkDmg);
+    public int getAtk() {
+        return atk;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = atk;
+    }
+
+    public boolean tomarDano(int dmg) {
+        this.hp -= dmg;
+
+        if (hp <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

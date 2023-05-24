@@ -1,10 +1,21 @@
+import items.Armor;
+import items.Item;
+import items.Potion;
+import items.Sword;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner sc = new Scanner(System.in);
+    public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        List<Item> inventario = new ArrayList<Item>();
+        inventario.add(new Sword("Espada de cobre", 2, 7, 0.04f));
+        inventario.add(new Armor("Armadura de couro", 2, 5));
+        inventario.add(new Potion("Poção simples", 5));
 
-        Entidade player = new Entidade("Herói",100,1, 10);
+        Player player = new Player("Você",20, 0,1, 7, inventario);
 
         int op;
         do {
@@ -19,29 +30,15 @@ public class Main {
 
             switch (op) {
                 case 1:
-                    batalhar(player);
+                    new Batalhar(player);
+                    break;
+                case 2:
+                    for(Item item: player.getInventario()) {
+                        System.out.printf("%d x %s%n", item.getQtd(), item.getName());
+                    }
+                    break;
             }
 
         } while (op != 0);
-
-
-    }
-
-    private static void batalhar(Entidade player) {
-        Entidade inimigo = new Entidade("Cleber",100, 1,5);
-
-        do {
-            System.out.println("+--------+------+");
-            System.out.printf("| %-6s | %-4s |%n", "Nome", "Vida");
-            System.out.println("+--------+------+");
-            System.out.printf("| %-6s | %-4d |%n", player.getNome(), player.getHp());
-            System.out.printf("| %-6s | %-4d |%n", inimigo.getNome(), inimigo.getHp());
-            System.out.println("+--------+------+");
-            System.out.println();
-            System.out.println("+--------+------+");
-            System.out.printf("| %-6s | %-20s |%n", "");
-
-            int op = sc.nextInt();
-        } while (inimigo.getHp() > 0 || player.getHp() > 0);
     }
 }
